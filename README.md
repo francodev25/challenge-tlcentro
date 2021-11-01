@@ -5,6 +5,18 @@
 ## About Challenge
 
 I chose Laravel v8 and VueJS v2 for the solution because of the position requirements: have experience on these frameworks
+
+### Instructions
+
+<ol>
+  <li>Create the .env file as you can see in .env.example.
+  </li>
+  <li>
+    Run `npm run watch` and also php artisan serve
+  </li>
+</ol>
+(Note) : If you are running at `127.0.0.1:8000`, consider to change the current URL at .env file at => MIX_API_URL , otherwise It won't work at consulting the 'first server' one example at initialServers.js.
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
