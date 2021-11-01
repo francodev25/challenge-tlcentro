@@ -31,7 +31,7 @@
 
 <script>
 import { Lane, Card, Button } from "../components";
-import { mapGetters } from "vuex";
+import { mapGetters , mapActions } from "vuex";
 const API_URL = process.env.MIX_API_URL;
 export default {
     name: "Home",
@@ -49,10 +49,20 @@ export default {
             isDebug: process.env.NODE_ENV !== "production"
         };
     },
+    async created(){
+        const ser = await fetch(`${API_URL}/api/v1/servers`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('data',data)
+                    return data
+                })
+        this.setInitialServers(ser);
+    },
     computed: {
         ...mapGetters(["servers", "serverSelected", "dataServerSNMP"])
     },
     methods: {
+        ...mapActions(["setInitialServers"]),
         handleRequest() {
             fetch(`${API_URL}/snmp/${this.serverSelected.ip}`, {
                 mode: "cors",

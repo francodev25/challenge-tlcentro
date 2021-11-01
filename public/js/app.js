@@ -1816,6 +1816,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
 
 /***/ }),
@@ -1883,7 +1888,7 @@ window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
  */
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -2003,12 +2008,12 @@ var About = function About() {
 };
 
 var routes = [{
-  name: 'home',
-  path: '/',
+  name: "home",
+  path: "/",
   component: Home
 }, {
-  name: 'about',
-  path: '/about',
+  name: "about",
+  path: "/about",
   component: About
 }];
 
@@ -2057,22 +2062,7 @@ if (debug) {
   state: {
     draggingCard: null,
     serverSelected: null,
-    servers: [{
-      id: 1,
-      description: "primer",
-      host: "localhost",
-      ip: "127.0.0.1"
-    }, {
-      id: 2,
-      description: "segundo",
-      host: "anotherWebsite_1",
-      ip: "195.168.12.15"
-    }, {
-      id: 3,
-      description: "tercero",
-      host: "anotherWebsite_2",
-      ip: "195.168.1.15"
-    }],
+    servers: null,
     dataServerSNMP: {}
   },
   getters: {
@@ -2087,6 +2077,9 @@ if (debug) {
     }
   },
   mutations: {
+    SET_INITIAL_SERVERS: function SET_INITIAL_SERVERS(state, payload) {
+      state.servers = payload;
+    },
     ADD_SERVER: function ADD_SERVER(state, payload) {
       state.servers = [].concat(_toConsumableArray(state.servers), [payload]);
     },
@@ -2105,29 +2098,33 @@ if (debug) {
     GET_DATA_SNMP: function GET_DATA_SNMP(state, payload) {}
   },
   actions: {
-    addServer: function addServer(_ref, payload) {
+    setInitialServers: function setInitialServers(_ref, payload) {
       var commit = _ref.commit;
-      commit('ADD_SERVER', payload);
+      commit("SET_INITIAL_SERVERS", payload);
     },
-    addDragStart: function addDragStart(_ref2, payload) {
+    addServer: function addServer(_ref2, payload) {
       var commit = _ref2.commit;
-      commit('ADD_DRAG_START', payload);
+      commit("ADD_SERVER", payload);
     },
-    addServerFrom: function addServerFrom(_ref3, index) {
+    addDragStart: function addDragStart(_ref3, payload) {
       var commit = _ref3.commit;
-      commit('ADD_SERVER_FROM', index);
+      commit("ADD_DRAG_START", payload);
     },
-    removeServerFrom: function removeServerFrom(_ref4, index) {
+    addServerFrom: function addServerFrom(_ref4, index) {
       var commit = _ref4.commit;
-      commit('REMOVE_SERVER_FROM', index);
+      commit("ADD_SERVER_FROM", index);
     },
-    setServer: function setServer(_ref5, payload) {
+    removeServerFrom: function removeServerFrom(_ref5, index) {
       var commit = _ref5.commit;
-      commit('SET_SERVER', payload);
+      commit("REMOVE_SERVER_FROM", index);
     },
-    getDataSNMP: function getDataSNMP(_ref6, payload) {
+    setServer: function setServer(_ref6, payload) {
       var commit = _ref6.commit;
-      commit('GET_DATA_SNMP', payload);
+      commit("SET_SERVER", payload);
+    },
+    getDataSNMP: function getDataSNMP(_ref7, payload) {
+      var commit = _ref7.commit;
+      commit("GET_DATA_SNMP", payload);
     }
   },
   strict: debug,
@@ -2195,7 +2192,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-telecentro[data-v-f348271a]{\n    background: rgb(4,18,52);\n}\n.nav-link[data-v-f348271a]{\n    color:white;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.bg-telecentro[data-v-f348271a] {\r\n    background: rgb(4, 18, 52);\n}\n.nav-link[data-v-f348271a] {\r\n    color: white;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

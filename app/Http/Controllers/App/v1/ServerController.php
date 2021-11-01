@@ -6,16 +6,19 @@ use App\Http\Controllers\Controller;
 use App\Server;
 use Illuminate\Http\Request;
 
+use App\Http\Resources\v1\ServerResource;
+
 class ServerController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * Get the last 5 Server order by Updated
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         //
+        return response()->json(ServerResource::collection(Server::orderByDesc('updated_at')->limit(5)->get()));
     }
 
     /**
@@ -38,6 +41,7 @@ class ServerController extends Controller
     public function show(Server $server)
     {
         //
+        return response()->json(new ServerResource($server));
     }
 
     /**

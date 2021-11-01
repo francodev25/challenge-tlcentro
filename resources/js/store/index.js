@@ -17,26 +17,7 @@ export default new Vuex.Store({
     state: {
         draggingCard: null,
         serverSelected: null,
-        servers: [
-            {
-                id: 1,
-                description: "primer",
-                host: "localhost",
-                ip: "127.0.0.1"
-            },
-            {
-                id: 2,
-                description: "segundo",
-                host: "anotherWebsite_1",
-                ip: "195.168.12.15"
-            },
-            {
-                id: 3,
-                description: "tercero",
-                host: "anotherWebsite_2",
-                ip: "195.168.1.15"
-            }
-        ],
+        servers: null,
         dataServerSNMP: {}
     },
     getters: {
@@ -51,6 +32,9 @@ export default new Vuex.Store({
         }
     },
     mutations: {
+        SET_INITIAL_SERVERS(state, payload){
+            state.servers = payload
+        },
         ADD_SERVER(state, payload) {
             state.servers = [...state.servers, payload];
         },
@@ -69,6 +53,9 @@ export default new Vuex.Store({
         GET_DATA_SNMP(state, payload) {}
     },
     actions: {
+        setInitialServers({ commit },payload){
+            commit("SET_INITIAL_SERVERS",payload)
+        },
         addServer({ commit }, payload) {
             commit("ADD_SERVER", payload);
         },

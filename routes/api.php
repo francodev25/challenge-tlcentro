@@ -19,4 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 */
 
 
-Route::apiResource('v1/servers', 'App\v1\ServerController');
+Route::apiResource('v1/servers', 'App\v1\ServerController')->only(['index', 'show']);
