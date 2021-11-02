@@ -9,13 +9,21 @@ I chose Laravel v8 and VueJS v2 for the solution because of the position require
 ### Instructions
 
 <ol>
+  <li>Clone the repo in your local machine
+  </li>
   <li>Create the .env file as you can see in .env.example.
+  (Don't forget to get your encrypt key with the following command `php artisan key:generate`)
+  </li>
+  <li> Run Apache and MySQL with XAMMP or Laragon
+  </li>
+  <li>Create the DB and Run the migrations with the seeders 
+    `php artisan migrate --seed`
   </li>
   <li>
-    Run `npm run watch` and also php artisan serve
+    Run `npm run watch` and also `php artisan serve`
   </li>
 </ol>
-(Note) : If you are running at `127.0.0.1:8000`, consider to change the current URL at .env file at => MIX_API_URL , otherwise It won't work at consulting the 'first server' one example at initialServers.js.
+(Note) : If you are running at `127.0.0.1:8000`, consider to change the current URL at .env file: MIX_API_URL , otherwise It won't work at consulting the 'first server' one example.
 
 ## About Laravel
 
