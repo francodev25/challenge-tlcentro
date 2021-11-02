@@ -32,9 +32,7 @@
                     <i class="bx bxs-check-circle" style="color:#ccc"> </i>
                 </div>
                 <div class="action">
-                    <router-link :to="`/editServer/${element.id}`">
-                        <i class="bx bxs-pencil"></i>
-                    </router-link>
+                    <i class="bx bxs-pencil" @click="openEditor(element)"></i>
                 </div>
                 <div class="action">
                     <i
@@ -48,7 +46,12 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { createNamespacedHelpers } from "vuex";
+const { mapGetters: mapGettersServers } = createNamespacedHelpers("servers");
+//Actions for Open Modal and Editing
+const { mapActions: mapActionsEditors } = createNamespacedHelpers(
+    "editorModal"
+);
 export default {
     name: "CardLane",
     props: {
@@ -63,21 +66,26 @@ export default {
         };
     },
     computed: {
-        ...mapGetters(["serverSelected"])
+        ...mapGettersServers(["serverSelected"])
     },
     methods: {
+        ...mapActionsEditors(["openModal", "setEditor"]),
         handleDelete(description) {
             //TODO: Delete Confirm alert
             alert(`Are you sure for deleting ? : ${description}`);
         },
         handleInput(element) {
             this.$emit("input", element);
+        },
+        openEditor(element) {
+            this.openModal();
+            this.setEditor(element);
         }
     }
 };
 </script>
 
-<style>
+<style scoped>
 .card {
     margin: 0.5rem 0;
 }

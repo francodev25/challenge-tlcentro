@@ -2,12 +2,17 @@
     <div>
         <h1 class="example">Consultas SNMP</h1>
         <div class="board">
-            <Lane :servers="servers" />
+            <!-- Lane DND -->
+            <Lane/>
+
+            <!-- Server CardLane Selected -->
             <div class="serverSelected" v-if="serverSelected">
-                <Button :slug="'Consultar'" @click="handleRequest"></Button>
+                <BaseButton :slug="'Consultar'" @click="handleRequest"></BaseButton>
                 <Card :element="serverSelected" />
             </div>
-            <div class="serverSelected" v-if="serverSelected && dataServerSNMP">
+
+            <!-- Request Results-->
+            <div class="serverSelected" v-if="serverSelected">
                 <div v-for="(result, index) in resultsKeys">
                     <p>
                         <span class="resultTitle">
@@ -30,15 +35,22 @@
 </template>
 
 <script>
-import { Lane, Card, Button } from "../components";
-import { mapGetters , mapActions } from "vuex";
+import { Lane, Card, BaseButton} from "../components";
+import { createNamespacedHelpers } from "vuex";
+const {
+    mapGetters: mapGettersServers,
+    mapActions: mapActionsServers
+} = createNamespacedHelpers("servers");
+const {
+    mapActions: mapActionsEditor
+} = createNamespacedHelpers("editorModal");
 const API_URL = process.env.MIX_API_URL;
 export default {
     name: "Home",
     components: {
         Lane,
         Card,
-        Button
+        BaseButton,
     },
     data() {
         return {
@@ -57,12 +69,14 @@ export default {
                     return data
                 })
         this.setInitialServers(ser);
+        this.setServer(ser[0]);
     },
     computed: {
-        ...mapGetters(["servers", "serverSelected", "dataServerSNMP"])
+        ...mapGettersServers(["servers", "serverSelected"]),
     },
     methods: {
-        ...mapActions(["setInitialServers"]),
+        ...mapActionsServers(["setInitialServers", "setServer"]),
+        ...mapActionsEditor(["openModal"]),
         handleRequest() {
             fetch(`${API_URL}/snmp/${this.serverSelected.ip}`, {
                 mode: "cors",
@@ -88,6 +102,10 @@ export default {
 </script>
 
 <style>
+.overflow-hidden {
+  overflow: hidden;
+}
+
 .board {
     display: grid;
     grid-template-rows: 1fr;
@@ -95,11 +113,13 @@ export default {
     align-items: center;
     padding: 20px;
 }
+
 .serverSelected {
     padding: 0 1rem;
     width: 100%;
     height: 100%;
 }
+
 .resultTitle {
     font-weight: 600;
 }

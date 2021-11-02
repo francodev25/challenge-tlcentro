@@ -1,6 +1,6 @@
 <template>
     <div class="lane">
-        <div class="lane__couter">Total : {{ servers.length }}</div>
+        <div class="lane__couter">Total : {{ serversLength }}</div>
         <Container
             group-name="list-servers"
             @drag-start="handleDragStart($event)"
@@ -22,17 +22,16 @@
 
 <script>
 import { Container, Draggable } from "vue-smooth-dnd";
-import { mapActions } from "vuex";
+import { createNamespacedHelpers  } from "vuex";
+const {
+    mapGetters: mapGettersServers,
+    mapActions: mapActionsServers
+} = createNamespacedHelpers("servers");
+
 import CardLane from "../CardLane";
 
 export default {
     name: "Lane",
-    props: {
-        servers: {
-            required: true,
-            type: Array
-        }
-    },
     components: {
         CardLane,
         Container,
@@ -48,8 +47,11 @@ export default {
             picked: null
         };
     },
+    computed:{
+        ...mapGettersServers(['servers' , 'serversLength'])
+    },
     methods: {
-        ...mapActions([
+        ...mapActionsServers([
             "addDragStart",
             "addServerFrom",
             "removeServerFrom",

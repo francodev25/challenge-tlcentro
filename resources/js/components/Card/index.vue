@@ -19,8 +19,8 @@ export default {
     name: "Card",
     props: {
         element: {
-            required: true,
-            type: Object
+            type: Object,
+            required: true
         }
     }
 };
